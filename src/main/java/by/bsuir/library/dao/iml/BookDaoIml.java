@@ -3,13 +3,10 @@ package by.bsuir.library.dao.iml;
 import by.bsuir.library.cache.Cache;
 import by.bsuir.library.dao.BookDao;
 import by.bsuir.library.entity.Book;
-import org.apache.log4j.Logger;
 
 import java.util.List;
 
 public class BookDaoIml implements BookDao {
-
-    private static final Logger LOGGER = Logger.getLogger(BookDaoIml.class);
 
     @Override
     public List<Book> getAll() {
