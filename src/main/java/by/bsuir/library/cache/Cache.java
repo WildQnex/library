@@ -11,6 +11,7 @@ import java.util.Properties;
 
 public class Cache implements AutoCloseable {
     private static final Logger LOGGER = Logger.getLogger(Cache.class);
+    public static final String DATABASE = "src\\main\\resources\\path.properties";
     private Properties pro;
 
     private List<Book> books;
@@ -19,7 +20,7 @@ public class Cache implements AutoCloseable {
     private Cache() throws Exception{
         try {
             pro = new Properties();
-            pro.load(new FileReader("src\\main\\resources\\path.properties"));
+            pro.load(new FileReader(DATABASE));
         } catch (IOException e){
             LOGGER.error(e.getMessage());
         }

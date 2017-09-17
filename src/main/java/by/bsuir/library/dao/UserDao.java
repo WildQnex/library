@@ -6,4 +6,5 @@ import java.util.List;
 public interface UserDao {
     List<User> getAll();
     void createUser(User user);
+    long getLastId();
 }

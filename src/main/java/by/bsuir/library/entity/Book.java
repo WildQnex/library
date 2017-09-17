@@ -1,19 +1,25 @@
 package by.bsuir.library.entity;
 
+import by.bsuir.library.util.IdGenerator;
+
 import java.io.Serializable;
 
 public class Book implements Serializable{
-    private int id;
+    private long id;
     private String name;
     private String author;
 
-    public Book(int id, String name, String author) {
-        this.id = id;
+    public Book(String name, String author) {
+        this.id = IdGenerator.getInstance().nextBookId();
         this.name = name;
         this.author = author;
     }
 
-    public int getId() {
+    public Book(long id){
+        this.id = id;
+    }
+
+    public long getId() {
         return id;
     }
 
@@ -25,7 +31,7 @@ public class Book implements Serializable{
         return author;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -51,7 +57,7 @@ public class Book implements Serializable{
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (author != null ? author.hashCode() : 0);
         return result;

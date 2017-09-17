@@ -8,4 +8,5 @@ public interface BookDao {
 
     List<Book> getAll();
     void createBook(Book book);
+    long getLastId();
 }

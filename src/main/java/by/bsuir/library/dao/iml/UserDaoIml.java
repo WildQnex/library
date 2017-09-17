@@ -27,4 +27,14 @@ public class UserDaoIml implements UserDao {
     public void createUser(User user) {
         Cache.getInstance().getUsers().add(user);
     }
+
+    @Override
+    public long getLastId() {
+        List<User> users = Cache.getInstance().getUsers();
+
+        return users.stream()
+                .max((o1, o2) -> (int) (o1.getId() - o2.getId()))
+                .orElse(new User(0L))
+                .getId();
+    }
 }

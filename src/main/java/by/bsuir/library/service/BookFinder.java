@@ -7,8 +7,7 @@ import java.util.List;
 
 public class BookFinder {
     public static Book findBookById(int id){
-        Book book = new Book(1, "Java. Methods of Programming", "Blinov");
-        return book;
+        return null;
     }
 
     public static List<Book> findBooksByName(String name){
