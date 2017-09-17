@@ -32,6 +32,11 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.bretty</groupId>
+            <artifactId>console-view</artifactId>
+            <version>3.4</version>
+        </dependency>
     </dependencies>
 
 </project>

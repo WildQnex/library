@@ -19,28 +19,28 @@ public class User implements Serializable{
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassHash() {
         return passHash;
     }
 
-    public void setPassHash(String passHash) {
-        this.passHash = passHash;
-    }
-
     public int getPrivilege() {
         return privilege;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassHash(String passHash) {
+        this.passHash = passHash;
     }
 
     public void setPrivilege(int privilege) {
