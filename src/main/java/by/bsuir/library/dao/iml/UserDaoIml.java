@@ -2,12 +2,15 @@ package by.bsuir.library.dao.iml;
 
 import by.bsuir.library.cache.Cache;
 import by.bsuir.library.dao.UserDao;
+import by.bsuir.library.entity.Book;
 import by.bsuir.library.entity.User;
 import org.apache.log4j.Logger;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class UserDaoIml implements UserDao {
 
@@ -36,5 +39,45 @@ public class UserDaoIml implements UserDao {
                 .max((o1, o2) -> (int) (o1.getId() - o2.getId()))
                 .orElse(new User(0L))
                 .getId();
+    }
+
+    @Override
+    public List<User> getUserByName(String name) {
+        List<User> users = Cache.getInstance().getUsers();
+
+        return users.stream()
+                .filter(user -> user.getName().equals(name))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<User> getUserByMail(String mail) {
+        List<User> users = Cache.getInstance().getUsers();
+
+        return users.stream()
+                .filter(user -> user.getMail().equals(mail))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<User> getUserByMailAndName(String mail, String name) {
+        List<User> users = Cache.getInstance().getUsers();
+
+        return users.stream()
+                .filter(user -> user.getMail().equals(mail) && user.getName().equals(name))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public User getUserById(long id) {
+        List<User> users = Cache.getInstance().getUsers();
+        Optional<User> optionalUser = users.stream()
+                .filter(user -> (user.getId() == id))
+                .findAny();
+        if(optionalUser.isPresent()){
+            return optionalUser.get();
+        }else{
+            return new User(0L);
+        }
     }
 }

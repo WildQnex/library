@@ -9,6 +9,8 @@ import by.bsuir.library.dao.iml.UserDaoIml;
 import by.bsuir.library.entity.Book;
 import by.bsuir.library.entity.Role;
 import by.bsuir.library.entity.User;
+import by.bsuir.library.ui.Menu;
+
 import org.apache.log4j.Logger;
 import java.util.List;
 
@@ -21,7 +23,9 @@ public class Main {
 
         try (Cache cache = Cache.getInstance()) {
 
-            UserDao userDao = new UserDaoIml();
+            Menu.rootMenu.display();
+
+            /*UserDao userDao = new UserDaoIml();
             BookDao bookDao = new BookDaoIml();
 
             userDao.createUser(new User("Vadim", "Vadim", "654", Role.ADMIN));
@@ -31,10 +35,7 @@ public class Main {
             bookDao.createBook(new Book("KNIGA2", "AUTHOR2"));
 
             List<User> users = userDao.getAll();
-            LOGGER.debug(users);
-
-            List<Book> books = bookDao.getAll();
-            LOGGER.debug(books);
+            LOGGER.debug(users);*/
 
         } catch (Exception e) {
             LOGGER.error(e.getMessage());

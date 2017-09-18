@@ -7,14 +7,14 @@ import java.io.Serializable;
 public class User implements Serializable{
     private long id;
     private String name;
-    private String username;
+    private String mail;
     private String passHash;
     private Role role;
 
     public User(String name, String username, String passHash, Role role) {
         this.id = IdGenerator.getInstance().nextUserId();
         this.name = name;
-        this.username = username;
+        this.mail = username;
         this.passHash = passHash;
         this.role = role;
     }
@@ -39,12 +39,12 @@ public class User implements Serializable{
         this.name = name;
     }
 
-    public String getUsername() {
-        return username;
+    public String getMail() {
+        return mail;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getPassHash() {
@@ -72,7 +72,7 @@ public class User implements Serializable{
 
         if (id != user.id) return false;
         if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (mail != null ? !mail.equals(user.mail) : user.mail != null) return false;
         if (passHash != null ? !passHash.equals(user.passHash) : user.passHash != null) return false;
         return role == user.role;
     }
@@ -81,7 +81,7 @@ public class User implements Serializable{
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (mail != null ? mail.hashCode() : 0);
         result = 31 * result + (passHash != null ? passHash.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
@@ -92,7 +92,7 @@ public class User implements Serializable{
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", username='" + username + '\'' +
+                ", username='" + mail + '\'' +
                 ", passHash='" + passHash + '\'' +
                 ", role=" + role +
                 '}';

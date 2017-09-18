@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class Cache implements AutoCloseable {
     private static final Logger LOGGER = Logger.getLogger(Cache.class);
-    public static final String DATABASE = "src\\main\\resources\\path.properties";
+    public static final String DATABASE = "src\\main\\resources\\settings.properties";
     private Properties pro;
     private String dirPath;
     private String fileBookPath;
