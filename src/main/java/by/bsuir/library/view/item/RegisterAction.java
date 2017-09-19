@@ -1,4 +1,4 @@
-package by.bsuir.library.view.items;
+package by.bsuir.library.view.item;
 
 import io.bretty.console.view.ActionView;
 

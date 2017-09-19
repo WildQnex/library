@@ -1,4 +1,4 @@
-package by.bsuir.library.view.items;
+package by.bsuir.library.view.item;
 
 import by.bsuir.library.dao.iml.BookDaoIml;
 import by.bsuir.library.entity.Book;

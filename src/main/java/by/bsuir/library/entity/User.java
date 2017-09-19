@@ -13,10 +13,10 @@ public class User implements Serializable{
     private Role role;
 
 
-    public User(String name, String username, String passHash, Role role, long activation) {
+    public User(String name, String mail, String passHash, Role role, long activation) {
         this.id = IdGenerator.getInstance().nextUserId();
         this.name = name;
-        this.mail = username;
+        this.mail = mail;
         this.passHash = passHash;
         this.role = role;
         this.activation = activation;

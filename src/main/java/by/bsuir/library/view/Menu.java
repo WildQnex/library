@@ -1,13 +1,15 @@
 package by.bsuir.library.view;
 
+import by.bsuir.library.entity.User;
 import by.bsuir.library.view.console.LibraryMenuView;
-import by.bsuir.library.view.items.AddBookAction;
-import by.bsuir.library.view.items.FindBookByNameAction;
-import by.bsuir.library.view.items.LoginAction;
-import by.bsuir.library.view.items.RegisterAction;
+import by.bsuir.library.view.item.*;
+import io.bretty.console.view.MenuView;
 import io.bretty.console.view.ViewConfig;
 
 public class Menu {
+
+    public static User loggedUser;
+
     private ViewConfig authViewConfig = new ViewConfig.Builder()
             .setQuitMenuName("Logout")
             .setQuitMessage("Logging out...")
@@ -33,8 +35,15 @@ public class Menu {
         adminMenu.display();
     }
 
+    public void displayUserMenu(){
+        userMenu.display();
+    }
     private void init() {
-        adminMenu.addMenuItem(new FindBookByNameAction());
+        userMenu.addMenuItem(new ListAllBooksAction());
+        userMenu.addMenuItem(new ListBooksByNameAction());
+
+        adminMenu.addMenuItem(new ListAllBooksAction());
+        adminMenu.addMenuItem(new ListBooksByNameAction());
         adminMenu.addMenuItem(new AddBookAction());
 
         rootMenu.addMenuItem(new LoginAction());

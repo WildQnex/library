@@ -1,9 +1,12 @@
 package by.bsuir.library.view.console;
 
+import by.bsuir.library.view.Menu;
 import io.bretty.console.view.MenuView;
 import io.bretty.console.view.ViewConfig;
 
-public class LibraryMenuView extends MenuView  {
+import java.util.Map;
+
+public class LibraryMenuView extends MenuView {
 
     public LibraryMenuView(String runningTitle, String nameInParentMenu) {
         super(runningTitle, nameInParentMenu);
@@ -21,7 +24,16 @@ public class LibraryMenuView extends MenuView  {
                 this.parentView.display();
             }
         } else {
+            Menu.loggedUser = null;
             this.onQuit();
         }
+    }
+
+    @Override
+    public void display() {
+        if (Menu.loggedUser != null) {
+            this.println("\nUser: " + Menu.loggedUser.getName() + " | Role: " + Menu.loggedUser.getRole());
+        }
+        super.display();
     }
 }
