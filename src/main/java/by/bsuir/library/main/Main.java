@@ -1,7 +1,7 @@
 package by.bsuir.library.main;
 
 import by.bsuir.library.cache.Cache;
-import by.bsuir.library.ui.Menu;
+import by.bsuir.library.view.Menu;
 import org.apache.log4j.Logger;
 
 public class Main {
@@ -10,9 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         try (Cache cache = Cache.getInstance()) {
-
-            Menu.rootMenu.display();
-
+            Menu.getInstance().displayMainMenu();
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
