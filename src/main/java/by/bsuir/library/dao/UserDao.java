@@ -8,6 +8,7 @@ public interface UserDao {
     List<User> getAll();
     void createUser(User user);
     long getLastId();
+    boolean isEmailExists(String email);
     List<User> getUserByName(String name);
     List<User> getUserByMail(String mail);
     List<User> getUserByMailAndName(String mail, String name);

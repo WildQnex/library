@@ -1,13 +1,14 @@
 package by.bsuir.library.view.item;
 
-import by.bsuir.library.dao.iml.BookDaoIml;
+import by.bsuir.library.dao.BookDao;
+import by.bsuir.library.dao.impl.BookDaoImpl;
 import by.bsuir.library.entity.Book;
 import by.bsuir.library.util.Util;
 import io.bretty.console.view.ActionView;
 
-import java.util.List;
-
 public class ListBooksByNameAction extends ActionView {
+
+    private BookDao bookDao = new BookDaoImpl();
 
     public ListBooksByNameAction() {
         super("Book finder...", "Find book by name");
@@ -17,6 +18,6 @@ public class ListBooksByNameAction extends ActionView {
     public void executeCustomAction() {
         String bookName = this.prompt("Enter book name: ", String.class);
 
-        new Util<Book>().printListIfNotEmpty(new BookDaoIml().getBookByName(bookName), "No books were found");
+        new Util<Book>().printListIfNotEmpty(bookDao.getBookByName(bookName), "No books were found");
     }
 }

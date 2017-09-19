@@ -1,14 +1,13 @@
-package by.bsuir.library.dao.iml;
+package by.bsuir.library.dao.impl;
 
 import by.bsuir.library.cache.Cache;
 import by.bsuir.library.dao.BookDao;
 import by.bsuir.library.entity.Book;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class BookDaoIml implements BookDao {
+public class BookDaoImpl implements BookDao {
 
     @Override
     public List<Book> getAll() {

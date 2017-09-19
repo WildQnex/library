@@ -2,13 +2,13 @@ package by.bsuir.library.util;
 
 import by.bsuir.library.dao.BookDao;
 import by.bsuir.library.dao.UserDao;
-import by.bsuir.library.dao.iml.BookDaoIml;
-import by.bsuir.library.dao.iml.UserDaoIml;
+import by.bsuir.library.dao.impl.BookDaoImpl;
+import by.bsuir.library.dao.impl.UserDaoImpl;
 
 public class IdGenerator {
 
-    private BookDao bookDao = new BookDaoIml();
-    private UserDao userDao = new UserDaoIml();
+    private BookDao bookDao = new BookDaoImpl();
+    private UserDao userDao = new UserDaoImpl();
 
     private IdGenerator() {
     }

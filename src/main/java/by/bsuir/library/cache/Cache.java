@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class Cache implements AutoCloseable {
     private static final Logger LOGGER = Logger.getLogger(Cache.class);
-    public static final String DATABASE = "src\\main\\resources\\settings.properties";
+    private static final String DATABASE = "src\\main\\resources\\settings.properties";
     private Properties pro;
     private String dirPath;
     private String fileBookPath;
@@ -84,7 +84,7 @@ public class Cache implements AutoCloseable {
     private void writeUsers(){
         try (FileOutputStream fos = new FileOutputStream(fileUserPath);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            oos.writeObject(users);
+            oos.writeObject(this.users);
             oos.flush();
         } catch(IOException e){
             LOGGER.error(e.getMessage());

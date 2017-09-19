@@ -1,13 +1,15 @@
 package by.bsuir.library.view.item;
 
-import by.bsuir.library.dao.iml.BookDaoIml;
+import by.bsuir.library.dao.BookDao;
+import by.bsuir.library.dao.impl.BookDaoImpl;
 import by.bsuir.library.entity.Book;
 import by.bsuir.library.util.Util;
 import io.bretty.console.view.ActionView;
 
-import java.util.List;
-
 public class ListAllBooksAction extends ActionView{
+
+    private BookDao bookDao = new BookDaoImpl();
+
 
     public ListAllBooksAction() {
         super("Books List", "Show books list");
@@ -15,6 +17,6 @@ public class ListAllBooksAction extends ActionView{
 
     @Override
     public void executeCustomAction() {
-        new Util<Book>().printListIfNotEmpty(new BookDaoIml().getAll(), "No books were found");
+        new Util<Book>().printListIfNotEmpty(bookDao.getAll(), "No books were found");
     }
 }

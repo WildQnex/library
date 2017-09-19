@@ -1,6 +1,6 @@
 package by.bsuir.library.view.item;
 
-import by.bsuir.library.dao.iml.BookDaoIml;
+import by.bsuir.library.dao.impl.BookDaoImpl;
 import by.bsuir.library.entity.Book;
 import io.bretty.console.view.ActionView;
 
@@ -11,6 +11,6 @@ public class AddBookAction extends ActionView{
 
     @Override
     public void executeCustomAction() {
-        new BookDaoIml().createBook(new Book(this.prompt("Enter book name", String.class), this.prompt("Enter book name", String.class)));
+        new BookDaoImpl().createBook(new Book(this.prompt("Enter book name", String.class), this.prompt("Enter book name", String.class)));
     }
 }

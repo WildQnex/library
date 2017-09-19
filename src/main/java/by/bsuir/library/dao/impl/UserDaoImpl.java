@@ -1,25 +1,20 @@
-package by.bsuir.library.dao.iml;
+package by.bsuir.library.dao.impl;
 
 import by.bsuir.library.cache.Cache;
 import by.bsuir.library.dao.UserDao;
-import by.bsuir.library.entity.Book;
 import by.bsuir.library.entity.User;
 import org.apache.log4j.Logger;
-import java.io.*;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Optional;
-import java.util.Properties;
 import java.util.stream.Collectors;
 
-public class UserDaoIml implements UserDao {
+public class UserDaoImpl implements UserDao {
 
-    private static final Logger LOGGER = Logger.getLogger(BookDaoIml.class);
+    private static final Logger LOGGER = Logger.getLogger(BookDaoImpl.class);
 
-    public UserDaoIml() {
+    public UserDaoImpl() {
 
     }
-
 
     @Override
     public List<User> getAll() {
@@ -39,6 +34,14 @@ public class UserDaoIml implements UserDao {
                 .max((o1, o2) -> (int) (o1.getId() - o2.getId()))
                 .orElse(new User(0L))
                 .getId();
+    }
+
+    @Override
+    public boolean isEmailExists(String email) {
+        List<User> users = Cache.getInstance().getUsers();
+
+        return users.stream()
+                .anyMatch(u -> u.getMail().equals(email));
     }
 
     @Override
