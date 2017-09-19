@@ -4,6 +4,7 @@ import by.bsuir.library.dao.UserDao;
 import by.bsuir.library.dao.impl.UserDaoImpl;
 import by.bsuir.library.entity.Role;
 import by.bsuir.library.entity.User;
+import by.bsuir.library.util.MailUtil;
 import io.bretty.console.view.ActionView;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -31,9 +32,11 @@ public class RegisterAction extends ActionView {
                 p -> PASSWORD_REGEX.matcher(p).matches());
         this.prompt("Repeat password: ", String.class, password::equals);
 
-        User newUser = new User(name, mail, BCrypt.hashpw(password, BCrypt.gensalt()), Role.USER,new Random().nextInt(900000) + 100000);
+        int registerCode = new Random().nextInt(900000) + 100000;
+
+        User newUser = new User(name, mail, BCrypt.hashpw(password, BCrypt.gensalt()), Role.USER, registerCode);
         userDao.createUser(newUser);
 
-        this.println("User successfully registered. Please Sign In using your credentials to continue.");
+        MailUtil.getInstance().sendRegisterMail(mail, name, String.valueOf(registerCode));
     }
 }

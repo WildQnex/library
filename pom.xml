@@ -12,6 +12,8 @@
         <log4j.version>1.2.17</log4j.version>
         <spring-security-crypto.version>4.2.3.RELEASE</spring-security-crypto.version>
         <console-view.version>3.4</console-view.version>
+        <mail.version>1.4.7</mail.version>
+        <javax.mail-api.version>1.6.0</javax.mail-api.version>
     </properties>
 
     <dependencies>
@@ -29,6 +31,17 @@
             <groupId>io.bretty</groupId>
             <artifactId>console-view</artifactId>
             <version>${console-view.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>${mail.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>${javax.mail-api.version}</version>
         </dependency>
     </dependencies>
 
