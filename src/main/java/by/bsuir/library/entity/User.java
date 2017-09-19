@@ -6,17 +6,20 @@ import java.io.Serializable;
 
 public class User implements Serializable{
     private long id;
+    private long activation;
     private String name;
     private String mail;
     private String passHash;
     private Role role;
 
-    public User(String name, String username, String passHash, Role role) {
+
+    public User(String name, String username, String passHash, Role role, long activation) {
         this.id = IdGenerator.getInstance().nextUserId();
         this.name = name;
         this.mail = username;
         this.passHash = passHash;
         this.role = role;
+        this.activation = activation;
     }
 
     public User(long id) {
@@ -63,6 +66,20 @@ public class User implements Serializable{
         this.role = role;
     }
 
+    public boolean activateUser(long code){
+        if(code == activation || activation == 0){
+            activation = 0;
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean isActvated(){
+        return this.activation == 0;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,6 +88,7 @@ public class User implements Serializable{
         User user = (User) o;
 
         if (id != user.id) return false;
+        if (activation != user.activation) return false;
         if (name != null ? !name.equals(user.name) : user.name != null) return false;
         if (mail != null ? !mail.equals(user.mail) : user.mail != null) return false;
         if (passHash != null ? !passHash.equals(user.passHash) : user.passHash != null) return false;
@@ -80,6 +98,7 @@ public class User implements Serializable{
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (activation ^ (activation >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (mail != null ? mail.hashCode() : 0);
         result = 31 * result + (passHash != null ? passHash.hashCode() : 0);
@@ -91,8 +110,9 @@ public class User implements Serializable{
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", activation=" + activation +
                 ", name='" + name + '\'' +
-                ", username='" + mail + '\'' +
+                ", mail='" + mail + '\'' +
                 ", passHash='" + passHash + '\'' +
                 ", role=" + role +
                 '}';

@@ -71,13 +71,9 @@ public class UserDaoIml implements UserDao {
     @Override
     public User getUserById(long id) {
         List<User> users = Cache.getInstance().getUsers();
-        Optional<User> optionalUser = users.stream()
-                .filter(user -> (user.getId() == id))
-                .findAny();
-        if(optionalUser.isPresent()){
-            return optionalUser.get();
-        }else{
-            return new User(0L);
-        }
+        return users.stream()
+                .filter(user -> user.getId() == id)
+                .findAny()
+                .orElse(new User(0L));
     }
 }

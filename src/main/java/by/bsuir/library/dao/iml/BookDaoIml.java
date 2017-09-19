@@ -60,13 +60,9 @@ public class BookDaoIml implements BookDao {
     @Override
     public Book getBookById(long id) {
         List<Book> books = Cache.getInstance().getBooks();
-        Optional<Book> optionalBook = books.stream()
-                .filter(book -> (book.getId() == id))
-                .findAny();
-        if(optionalBook.isPresent()){
-            return optionalBook.get();
-        }else{
-            return new Book(0L);
-        }
+        return books.stream()
+                .filter(book -> book.getId() == id)
+                .findAny()
+                .orElse(new Book(0L));
     }
 }
