@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class Cache implements AutoCloseable {
     private static final Logger LOGGER = Logger.getLogger(Cache.class);
-    private static final String SETTINGS = "src\\main\\resources\\settings.properties";
+    private static final String SETTINGS = "/settings.properties";
     private Properties pro;
     private String dirPath;
     private String fileBookPath;
@@ -23,7 +23,7 @@ public class Cache implements AutoCloseable {
     private Cache() throws Exception{
         try {
             pro = new Properties();
-            pro.load(new FileReader(SETTINGS));
+            pro.load(Cache.class.getResourceAsStream(SETTINGS));
 
             this.dirPath = pro.getProperty("directoryPath");
             this.fileBookPath = pro.getProperty("directoryPath") + File.separator + pro.getProperty("bookPath");

@@ -5,14 +5,13 @@ import org.apache.log4j.Logger;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
 public class MailUtil {
     private static final Logger LOGGER = Logger.getLogger(MailUtil.class);
 
-    private static final String SETTINGS = "src\\main\\resources\\settings.properties";
+    private static final String SETTINGS = "/settings.properties";
     private Properties props;
     private Session session;
 
@@ -20,7 +19,7 @@ public class MailUtil {
         props = new Properties();
 
         try {
-            props.load(new FileReader(SETTINGS));
+            props.load(MailUtil.class.getResourceAsStream(SETTINGS));
         } catch (IOException e){
             LOGGER.error(e.getMessage());
         }
