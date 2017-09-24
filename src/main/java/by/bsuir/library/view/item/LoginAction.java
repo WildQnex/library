@@ -31,6 +31,11 @@ public class LoginAction extends ActionView {
 
         if (optionalUser.isPresent()) {
             Menu.loggedUser = optionalUser.get();
+            if(!Menu.loggedUser.isActvated()){
+                this.prompt("Enter activation code from e-mail: ", Long.class,
+                        p -> Menu.loggedUser.activateUser(p));
+                this.println("Account successfully activated.");
+            }
             if (Menu.loggedUser.getRole() == Role.ADMIN) {
                 Menu.getInstance().displayAdminMenu();
             } else {

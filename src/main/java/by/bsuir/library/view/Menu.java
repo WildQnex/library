@@ -16,6 +16,7 @@ public class Menu {
             .build();
 
     private LibraryMenuView rootMenu = new LibraryMenuView("Welcome...", "");
+    private LibraryMenuView finderMenu = new LibraryMenuView("Choose finder type", "Book finder");
     private LibraryMenuView userMenu = new LibraryMenuView("Choose action", "", authViewConfig);
     private LibraryMenuView adminMenu = new LibraryMenuView("Choose action: ", "", authViewConfig);
 
@@ -39,11 +40,14 @@ public class Menu {
         userMenu.display();
     }
     private void init() {
-        userMenu.addMenuItem(new ListAllBooksAction());
-        userMenu.addMenuItem(new ListBooksByNameAction());
+        finderMenu.addMenuItem(new ListAllBooksAction());
+        finderMenu.addMenuItem(new ListBooksByAuthorAction());
+        finderMenu.addMenuItem(new ListBooksByNameAction());
+        finderMenu.addMenuItem(new BookByIDAction());
 
-        adminMenu.addMenuItem(new ListAllBooksAction());
-        adminMenu.addMenuItem(new ListBooksByNameAction());
+        userMenu.addMenuItem(finderMenu);
+
+        adminMenu.addMenuItem(finderMenu);
         adminMenu.addMenuItem(new AddBookAction());
 
         rootMenu.addMenuItem(new LoginAction());
