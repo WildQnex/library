@@ -70,7 +70,7 @@ public class User implements Serializable{
         if(code == activation || activation == 0){
             activation = 0;
             return true;
-        }else {
+        } else {
             return false;
         }
     }

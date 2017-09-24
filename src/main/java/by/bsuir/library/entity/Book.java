@@ -33,6 +33,10 @@ public class Book implements Serializable{
         return author;
     }
 
+    public BookType getBookType() {
+        return bookType;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -43,6 +47,10 @@ public class Book implements Serializable{
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public void setBookType(BookType bookType) {
+        this.bookType = bookType;
     }
 
     @Override

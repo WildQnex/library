@@ -3,7 +3,6 @@ package by.bsuir.library.view;
 import by.bsuir.library.entity.User;
 import by.bsuir.library.view.console.LibraryMenuView;
 import by.bsuir.library.view.item.*;
-import io.bretty.console.view.MenuView;
 import io.bretty.console.view.ViewConfig;
 
 public class Menu {
@@ -41,15 +40,16 @@ public class Menu {
     }
 
     private void init() {
-        finderMenu.addMenuItem(new ListAllBooksAction());
+
         finderMenu.addMenuItem(new ListBooksByAuthorAction());
         finderMenu.addMenuItem(new ListBooksByNameAction());
         finderMenu.addMenuItem(new ListBooksByAuthorAndName());
-        finderMenu.addMenuItem(new BookByIDAction());
+        finderMenu.addMenuItem(new BookByIdAction());
 
-
+        userMenu.addMenuItem(new ListAllBooksAction());
         userMenu.addMenuItem(finderMenu);
 
+        adminMenu.addMenuItem(new ListAllBooksAction());
         adminMenu.addMenuItem(finderMenu);
         adminMenu.addMenuItem(new AddBookAction());
 
