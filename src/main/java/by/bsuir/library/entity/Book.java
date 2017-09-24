@@ -8,11 +8,13 @@ public class Book implements Serializable{
     private long id;
     private String name;
     private String author;
+    private BookType bookType;
 
-    public Book(String name, String author) {
+    public Book(String name, String author, BookType bookType) {
         this.id = IdGenerator.getInstance().nextBookId();
         this.name = name;
         this.author = author;
+        this.bookType = bookType;
     }
 
     public Book(long id){
@@ -52,7 +54,8 @@ public class Book implements Serializable{
 
         if (id != book.id) return false;
         if (name != null ? !name.equals(book.name) : book.name != null) return false;
-        return author != null ? author.equals(book.author) : book.author == null;
+        if (author != null ? !author.equals(book.author) : book.author != null) return false;
+        return bookType == book.bookType;
     }
 
     @Override
@@ -60,6 +63,7 @@ public class Book implements Serializable{
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + (bookType != null ? bookType.hashCode() : 0);
         return result;
     }
 
@@ -69,6 +73,7 @@ public class Book implements Serializable{
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
+                ", bookType=" + bookType +
                 '}';
     }
 }

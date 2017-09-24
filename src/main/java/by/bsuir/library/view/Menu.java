@@ -39,11 +39,14 @@ public class Menu {
     public void displayUserMenu(){
         userMenu.display();
     }
+
     private void init() {
         finderMenu.addMenuItem(new ListAllBooksAction());
         finderMenu.addMenuItem(new ListBooksByAuthorAction());
         finderMenu.addMenuItem(new ListBooksByNameAction());
+        finderMenu.addMenuItem(new ListBooksByAuthorAndName());
         finderMenu.addMenuItem(new BookByIDAction());
+
 
         userMenu.addMenuItem(finderMenu);
 
