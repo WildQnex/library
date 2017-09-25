@@ -2,6 +2,7 @@ package by.bsuir.library.cache;
 
 import by.bsuir.library.entity.Book;
 import by.bsuir.library.entity.User;
+import by.bsuir.library.exception.CacheException;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -10,9 +11,11 @@ import java.util.List;
 import java.util.Properties;
 
 public class Cache implements AutoCloseable {
+
     private static final Logger LOGGER = Logger.getLogger(Cache.class);
     private static final String SETTINGS = "/settings.properties";
-    private Properties pro;
+
+    private Properties properties;
     private String dirPath;
     private String fileBookPath;
     private String fileUserPath;
@@ -20,18 +23,17 @@ public class Cache implements AutoCloseable {
     private List<Book> books;
     private List<User> users;
 
-    private Cache() throws Exception{
+    private Cache() throws CacheException {
         try {
-            pro = new Properties();
-            pro.load(Cache.class.getResourceAsStream(SETTINGS));
+            properties = new Properties();
+            properties.load(Cache.class.getResourceAsStream(SETTINGS));
 
-            this.dirPath = pro.getProperty("directoryPath");
-            this.fileBookPath = pro.getProperty("directoryPath") + File.separator + pro.getProperty("bookPath");
-            this.fileUserPath = pro.getProperty("directoryPath") + File.separator + pro.getProperty("userPath");
+            this.dirPath = properties.getProperty("directoryPath");
+            this.fileBookPath = properties.getProperty("directoryPath") + File.separator + properties.getProperty("bookPath");
+            this.fileUserPath = properties.getProperty("directoryPath") + File.separator + properties.getProperty("userPath");
         } catch (IOException e){
-            LOGGER.error(e.getMessage());
+            throw new CacheException("Error. Unable to open " + SETTINGS);
         }
-
         createFilesIfNotExist();
         readBooks();
         readUsers();
@@ -45,53 +47,59 @@ public class Cache implements AutoCloseable {
         return users;
     }
 
-    private void readBooks(){
+    private void readBooks() throws CacheException {
         List<Book> books = new ArrayList<>();
 
         try (FileInputStream fis = new FileInputStream(fileBookPath);
              ObjectInputStream oin = new ObjectInputStream(fis)) {
             books = (List<Book>) oin.readObject();
-        }catch(IOException | ClassNotFoundException | ClassCastException e){
-            LOGGER.error(e.getMessage());
+        }catch (EOFException e){
+            LOGGER.error("Error. Incorrect books input stream, file was cleared");
+        }
+        catch(IOException | ClassNotFoundException e){
+            throw new CacheException("Error. Unable to open file");
         }
 
         this.books = books;
     }
 
-    private void writeBooks(){
+    private void writeBooks() throws CacheException {
         try (FileOutputStream fos = new FileOutputStream(fileBookPath);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(books);
             oos.flush();
             oos.close();
         } catch(IOException e){
-            LOGGER.error(e.getMessage());
+            throw new CacheException("Error. Impossible to write books to file");
         }
     }
 
-    private void readUsers(){
+    private void readUsers() throws CacheException {
         List<User> users = new ArrayList<>();
         try (FileInputStream fis = new FileInputStream(fileUserPath);
              ObjectInputStream oin = new ObjectInputStream(fis)) {
             users = (List<User>) oin.readObject();
-        }catch(IOException | ClassNotFoundException e){
-            LOGGER.error(e.getMessage());
+        }catch (EOFException e){
+            LOGGER.error("Error. Incorrect users input stream, file was cleared");
+        }
+        catch(IOException | ClassNotFoundException e){
+            throw new CacheException("Error. Unable to open file");
         }
 
         this.users = users;
     }
 
-    private void writeUsers(){
+    private void writeUsers() throws CacheException {
         try (FileOutputStream fos = new FileOutputStream(fileUserPath);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(this.users);
             oos.flush();
         } catch(IOException e){
-            LOGGER.error(e.getMessage());
+            throw new CacheException("Error. Impossible to write books to file");
         }
     }
 
-    private void createFilesIfNotExist() {
+    private void createFilesIfNotExist() throws CacheException{
         try {
             File directoryPath = new File(dirPath);
             directoryPath.mkdir();
@@ -101,7 +109,7 @@ public class Cache implements AutoCloseable {
             File userFile = new File(fileUserPath);
             userFile.createNewFile();
         } catch (IOException e) {
-            LOGGER.error(e.getMessage());
+            throw new CacheException("Error. Unable to create " + fileBookPath + " or " + fileUserPath);
         }
     }
 
@@ -110,18 +118,18 @@ public class Cache implements AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() throws CacheException {
         createFilesIfNotExist();
         writeBooks();
         writeUsers();
     }
 
-    private static class SingletonHolder{
+    private static class SingletonHolder {
         private static final Cache INSTANCE;
         static {
             try {
                 INSTANCE = new Cache();
-            } catch (Exception e) {
+            } catch (CacheException e) {
                 throw new ExceptionInInitializerError(e);
             }
         }
