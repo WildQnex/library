@@ -4,8 +4,6 @@ import by.bsuir.library.view.Menu;
 import io.bretty.console.view.MenuView;
 import io.bretty.console.view.ViewConfig;
 
-import java.util.Map;
-
 public class LibraryMenuView extends MenuView {
 
     public LibraryMenuView(String runningTitle, String nameInParentMenu) {

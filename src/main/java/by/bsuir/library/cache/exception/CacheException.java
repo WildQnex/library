@@ -1,4 +1,4 @@
-package by.bsuir.library.exception;
+package by.bsuir.library.cache.exception;
 
 public class CacheException extends Exception {
     public CacheException() {

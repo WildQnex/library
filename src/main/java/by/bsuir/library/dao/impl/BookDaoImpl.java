@@ -57,11 +57,10 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public Book getBookById(long id) {
+    public List<Book> getBookById(long id) {
         List<Book> books = Cache.getInstance().getBooks();
         return books.stream()
                 .filter(book -> book.getId() == id)
-                .findAny()
-                .orElse(new Book(0L));
+                .collect(Collectors.toList());
     }
 }

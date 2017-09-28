@@ -1,7 +1,7 @@
 package by.bsuir.library.main;
 
 import by.bsuir.library.cache.Cache;
-import by.bsuir.library.exception.CacheException;
+import by.bsuir.library.cache.exception.CacheException;
 import by.bsuir.library.view.Menu;
 import org.apache.log4j.Logger;
 

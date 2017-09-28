@@ -11,5 +11,5 @@ public interface BookDao {
     List<Book> getBookByAuthor(String author);
     List<Book> getBookByName(String name);
     List<Book> getBookByAuthorAndName(String author, String name);
-    Book getBookById(long id);
+    List<Book> getBookById(long id);
 }

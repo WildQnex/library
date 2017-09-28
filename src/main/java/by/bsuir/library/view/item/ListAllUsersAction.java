@@ -2,21 +2,18 @@ package by.bsuir.library.view.item;
 
 import by.bsuir.library.dao.UserDao;
 import by.bsuir.library.dao.impl.UserDaoImpl;
-import by.bsuir.library.entity.Book;
-import by.bsuir.library.entity.User;
-import by.bsuir.library.util.Util;
-import io.bretty.console.view.ActionView;
-
-public class ListAllUsersAction extends ActionView {
+import by.bsuir.library.view.console.PaginationActionView;
+import by.bsuir.library.view.console.PaginationMenu;
+public class ListAllUsersAction extends PaginationActionView {
 
     private UserDao userDao = new UserDaoImpl();
 
     public ListAllUsersAction() {
-        super("Users List", "Show users list");
+        super("", "Show users list");
     }
 
     @Override
     public void executeCustomAction() {
-        new Util<User>().printListIfNotEmpty(userDao.getAll(), "No users were found");
+        new PaginationMenu("Users List", userDao.getAll(), 5, "No books were found").display();
     }
 }

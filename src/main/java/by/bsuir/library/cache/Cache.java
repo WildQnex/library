@@ -2,7 +2,7 @@ package by.bsuir.library.cache;
 
 import by.bsuir.library.entity.Book;
 import by.bsuir.library.entity.User;
-import by.bsuir.library.exception.CacheException;
+import by.bsuir.library.cache.exception.CacheException;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -53,10 +53,9 @@ public class Cache implements AutoCloseable {
         try (FileInputStream fis = new FileInputStream(fileBookPath);
              ObjectInputStream oin = new ObjectInputStream(fis)) {
             books = (List<Book>) oin.readObject();
-        }catch (EOFException e){
+        } catch (EOFException e){
             LOGGER.error("Error. Incorrect books input stream, file was cleared");
-        }
-        catch(IOException | ClassNotFoundException e){
+        } catch (IOException | ClassNotFoundException e){
             throw new CacheException("Error. Unable to open file");
         }
 
@@ -68,8 +67,7 @@ public class Cache implements AutoCloseable {
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(books);
             oos.flush();
-            oos.close();
-        } catch(IOException e){
+        } catch (IOException e){
             throw new CacheException("Error. Impossible to write books to file");
         }
     }
@@ -79,10 +77,9 @@ public class Cache implements AutoCloseable {
         try (FileInputStream fis = new FileInputStream(fileUserPath);
              ObjectInputStream oin = new ObjectInputStream(fis)) {
             users = (List<User>) oin.readObject();
-        }catch (EOFException e){
+        } catch (EOFException e){
             LOGGER.error("Error. Incorrect users input stream, file was cleared");
-        }
-        catch(IOException | ClassNotFoundException e){
+        } catch (IOException | ClassNotFoundException e){
             throw new CacheException("Error. Unable to open file");
         }
 
@@ -94,7 +91,7 @@ public class Cache implements AutoCloseable {
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(this.users);
             oos.flush();
-        } catch(IOException e){
+        } catch (IOException e){
             throw new CacheException("Error. Impossible to write books to file");
         }
     }

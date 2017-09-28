@@ -1,5 +1,7 @@
 package by.bsuir.library.view;
 
+import by.bsuir.library.dao.BookDao;
+import by.bsuir.library.dao.impl.BookDaoImpl;
 import by.bsuir.library.entity.User;
 import by.bsuir.library.view.console.LibraryMenuView;
 import by.bsuir.library.view.item.*;
@@ -7,6 +9,7 @@ import io.bretty.console.view.ViewConfig;
 
 public class Menu {
 
+    private BookDao bookDao = new BookDaoImpl();
     public static User loggedUser;
 
     private ViewConfig authViewConfig = new ViewConfig.Builder()
@@ -44,7 +47,7 @@ public class Menu {
 
         finderMenu.addMenuItem(new ListBooksByAuthorAction());
         finderMenu.addMenuItem(new ListBooksByNameAction());
-        finderMenu.addMenuItem(new ListBooksByAuthorAndName());
+        finderMenu.addMenuItem(new ListBooksByAuthorAndNameAction());
         finderMenu.addMenuItem(new BookByIdAction());
 
         userMenu.addMenuItem(new ListAllBooksAction());

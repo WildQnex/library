@@ -2,11 +2,10 @@ package by.bsuir.library.view.item;
 
 import by.bsuir.library.dao.BookDao;
 import by.bsuir.library.dao.impl.BookDaoImpl;
-import by.bsuir.library.entity.Book;
-import by.bsuir.library.util.Util;
-import io.bretty.console.view.ActionView;
+import by.bsuir.library.view.console.PaginationActionView;
+import by.bsuir.library.view.console.PaginationMenu;
 
-public class ListAllBooksAction extends ActionView{
+public class ListAllBooksAction extends PaginationActionView {
 
     private BookDao bookDao = new BookDaoImpl();
 
@@ -17,6 +16,6 @@ public class ListAllBooksAction extends ActionView{
 
     @Override
     public void executeCustomAction() {
-        new Util<Book>().printListIfNotEmpty(bookDao.getAll(), "No books were found");
+        new PaginationMenu("Books List", bookDao.getAll(), 5, "No books were found").display();
     }
 }
